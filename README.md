@@ -1,6 +1,6 @@
 # Programming Fundamentals I - Fall 2025
 
-## Lab Assignment #7: City Sorter
+## Lab Assignment #8: Processor Speed Analysis
 
 *Due at 11:59 pm the night before the next lab session*
 
@@ -8,59 +8,81 @@
 
 ## Purpose
 
-A delivery company is developing its own address catalog. Part of this application allows users to select locations to deliver packages. To do this efficiently, the catalog must be sorted. You will begin writing a simple algorithm to sort three cities by name. This lab focuses on the following concepts:
+A computer manufacturer is testing processor speeds using benchmark tests. Part of these tests involves calculating the geometric mean of a set of data points. A geometric mean requires multiplying the numbers together and getting the nth root of those numbers, where n is the amount of numbers. You will write a program that allows the user to enter any amount of data points and calculate the geometric mean of that entire data set. This lab focuses on the following concepts:
 
-• Comparing Strings using methods from the String class
+• Controlling a loop using a sentinel value
 
-• Using logical operators to build more complex boolean expressions
+• Displaying formatted outputs using printf
 
 ---
 
 ## In-Class Lesson
 
-To understand the basics of this sorting algorithm, write a program that accepts **two cities** from the user and sorts those two cities in alphabetical order. Use the `compareTo` method from the String class to make a comparison between the cities.
-
-The `compareTo` method returns a number indicating the difference in the Unicode values of the differing characters. Make sure this number is compared to another number that can be used to determine which city comes before the other alphabetically.
+To better understand the flow of this kind of program, consider a similar case: calculating the average of a set of grades. Write a program that will accept any amount of grades and prints the average as output. You will need to keep track of two pieces of information: the sum of the grades and the amount of grades. Use -1 as a sentinel value to finish inputting grades. 
 
 **Practice Exercise:** Write a simple program that:
-1. Prompts the user to enter two city names
-2. Uses `compareToIgnoreCase()` to compare them
-3. Prints the cities in alphabetical order using an if-else statement
+1. Prompts the user to enter grades (or -1 to end)
+2. Uses a while loop to accumulate the sum and count
+3. Calculates and prints the average when the user enters -1
 
-This simpler two-city comparison prepares you for the main lab assignment where you'll sort three cities.
+The following is an example of the program flow:
+
+```
+Please enter a grade (-1 to end): 100
+Please enter a grade (-1 to end): 64
+Please enter a grade (-1 to end): 87
+Please enter a grade (-1 to end): -1
+The average for the course is 83.67.
+```
+
+This simpler averaging program prepares you for the main lab assignment where you'll calculate the geometric mean of processor speeds.
 
 ---
 
 ## Task
 
-Create a project called `CitySorter_FirstName_LastName` or `Lab7_FirstName_LastName`. Remember to include comments summarizing the program.
+Create a project called `Processors_FirstName_LastName` or `Lab8_FirstName_LastName`. Remember to include comments summarizing the program.
 
 ### Requirements
 
 1. **Declare a Scanner** that accepts input from the keyboard.
 
-2. **Declare the following three variables** in your program:
+2. **Declare the following four variables** in your program:
 
-   • Three variables of type `String` that will hold three different cities the user enters
+   • A variable of type `int` that will hold the next processor speed to be included in the set
+   
+   • A variable of type `int` that will hold the amount of processor speeds (data points)
+   
+   • A variable of type `int` that will hold the product of all processor speeds
+   
+   • A variable of type `double` that will hold the final geometric mean of the data set
 
-   *Note: You may also consider three variables of type boolean to hold comparisons between the cities.*
+   **Initialize the variables for the amount and product to appropriate values** given the purpose of this program.
 
-3. **Prompt the user three times** to enter each of the three cities. Use the appropriate method of the Scanner class to assign each of the user's inputs to the appropriate String variable.
+3. **Prompt the user** to enter a processor speed or -1 to end. Use the appropriate method of the Scanner class to assign the user's input to the int variable for the next processor speed.
 
-4. **Determine the alphabetical order** of the cities using comparisons. The order of the cities will depend on the order of the statements to print those cities to the console. To determine the order to print the cities in, you will need to compare the cities using the appropriate method of the String class. 
+4. **Write a while loop** that will check if the user's input is not -1. While the input is not -1, do the following:
 
-   **Assume that case does not matter** and that the user enters three different cities. You must do **comparisons between all pairs of cities** to determine the correct order.
+   • Multiply the product by the next processor speed and assign this result back to the product.
+   
+   • Increment the amount of processor speeds.
+   
+   • Prompt the user again to enter a processor speed or -1 to end. Use the appropriate method of the Scanner class to assign the user's input to the int variable for the next processor speed.
 
-   For example, to determine if the last city that the user enters comes first alphabetically, compare this city to the other two cities. If the last city entered by the user does come first alphabetically, print that city and then compare the remaining two cities. Whichever comes second alphabetically is printed next, and then whichever comes last alphabetically is printed last.
+5. **After the user has finished entering processor speeds**, calculate the geometric mean using `Math.pow` to get the nth root. Be careful about performing integer division.
 
+6. **Display the geometric mean** to the console formatted to two decimal places.
+
+---
 
 ## Implementation Notes
 
-- Use the `compareToIgnoreCase()` method or convert strings to the same case before comparing to ensure case-insensitive comparisons
-- When `string1.compareTo(string2)` returns a negative number, `string1` comes before `string2` alphabetically
-- When `string1.compareTo(string2)` returns a positive number, `string2` comes before `string1` alphabetically
-- Use logical operators (&&, ||) to build complex boolean expressions for determining order
-- Your program must handle all six possible orderings of three cities
+- Initialize the product variable to 1 (since multiplying by 0 would result in 0)
+- Initialize the amount variable to 0 (since you start with no data points)
+- The geometric mean formula is: (product)^(1/n) where n is the amount of numbers
+- Use the appropriate mathematical expression to calculate the nth root, also known as "to the power of 1/n"
+- Use `printf` to display the result with two decimal places
+- Make sure to convert at least one value to double to avoid integer division
 
 ---
 
@@ -70,28 +92,25 @@ Create a project called `CitySorter_FirstName_LastName` or `Lab7_FirstName_LastN
 1. Open the terminal in your codespace (Terminal → New Terminal)
 2. Compile your program:
    ```bash
-   javac Lab7_YourFirstName_YourLastName.java
+   javac Lab8_YourFirstName_YourLastName.java
    ```
 3. Run your program:
    ```bash
-   java Lab7_YourFirstName_YourLastName
+   java Lab8_YourFirstName_YourLastName
    ```
 
-Replace `Lab7_YourFirstName_YourLastName.java` with your actual file name. If you are running the in-class exercise, use the corresponding file name instead.
+Replace `Lab8_YourFirstName_YourLastName.java` with your actual file name. If you are running the in-class exercise, use the corresponding file name instead.
 
 ---
 
 ## Example Program Flow
 
 ```
-Enter the first city: Dallas
-Enter the second city: Austin
-Enter the third city: Houston
-
-Cities in alphabetical order:
-Austin
-Dallas
-Houston
+Enter a processor speed (-1 to end): 100
+Enter a processor speed (-1 to end): 40
+Enter a processor speed (-1 to end): 76
+Enter a processor speed (-1 to end): -1
+The geometric mean of the processor speeds is 67.24
 ```
 
 ---
@@ -100,14 +119,17 @@ Houston
 
 - **Comment summarizing the program** (5 points)
 - **Importing and declaring the Scanner class** (2 points)
-- **Requests for the user's input** (9 points total)
-- **Properly comparing and printing the three Strings in alphabetical order** (14 points for each of the six possible initial orderings provided by the user = 84 points total)
+- **Appropriate variable declarations** (15 points total)
+- **The first request for the user's input** (3 points)
+- **Properly implementing the while loop** (45 points)
+- **The final calculation of the geometric mean** (20 points)
+- **The output of the program with the geometric mean formatted to two decimal places** (10 points)
 
 **Total: 100 points**
 
 ---
 
-💡 **Fun Tip:** Consider taking a screenshot of your terminal output after running your program with different city combinations! This helps you verify that all six possible orderings work correctly.
+💡 **Fun Tip:** Test your program with different sets of processor speeds to verify your geometric mean calculation is correct. You can use an online calculator to check your results! Don't forget to take a screenshot of terminal output and add to your directory on the left <-
 
 ---
 
@@ -124,6 +146,6 @@ After pushing your changes, visit your assignment repository on GitHub Classroom
 ### Step 3: Submit to Blackboard Assignment
 Once you have verified your submission on GitHub Classroom, copy the URL of your assignment repository and submit this GitHub repository link to Blackboard as confirmation that you are DONE.
 
-**Excellent work!** You've reached Lab 7, and this assignment introduces you to string comparison and sorting algorithms. Working with the `compareTo` method and logical operators will help you understand how computers sort text data. This is a fundamental skill that applies to databases, search engines, and countless other applications. Remember to test your program with different city orderings to ensure it handles all cases correctly. Breaking down the problem into smaller comparisons and using logical thinking will lead you to success!
+**Excellent work!** You've reached Lab 8, and this assignment introduces you to loop control with sentinel values and formatted output. Working with while loops and the `printf` method will help you understand how to process variable amounts of data and display results professionally. The geometric mean is used in many real-world applications like calculating average growth rates, investment returns, and benchmark performance. Remember to test your program with different numbers of processor speeds to ensure your loop and calculations work correctly!
 
 **Important:** Focus on completing the lab assignment. Do NOT edit or tamper with any test files, markdown files, or class files if they appear in your repository.
