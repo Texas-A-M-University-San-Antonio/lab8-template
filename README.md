@@ -1,151 +1,354 @@
-# Programming Fundamentals I - Fall 2025
+# Lab 8: Loops and Processor Speed Analysis
+**Due Date:** @ 11:59 the night *before* next lab
 
-## Lab Assignment #8: Processor Speed Analysis
-
-*Due at 11:59 pm the night before the next lab session*
-
----
-
-## Purpose
-
-A computer manufacturer is testing processor speeds using benchmark tests. Part of these tests involves calculating the geometric mean of a set of data points. A geometric mean requires multiplying the numbers together and getting the nth root of those numbers, where n is the amount of numbers. You will write a program that allows the user to enter any amount of data points and calculate the geometric mean of that entire data set. This lab focuses on the following concepts:
-
-• Controlling a loop using a sentinel value
-
-• Displaying formatted outputs using printf
+**Submission:** Push to GitHub repository + Submit link to Blackboard
 
 ---
 
-## In-Class Lesson
+## 📋 Overview
+This lab introduces **sentinel-controlled loops** and applies them to a real-world computing scenario: analyzing processor benchmark performance. You'll learn how to use a `while` loop to process an unknown number of inputs, accumulate data, and calculate the geometric mean—a statistical measure commonly used in computer performance analysis.
 
-To better understand the flow of this kind of program, consider a similar case: calculating the average of a set of grades. Write a program that will accept any amount of grades and prints the average as output. You will need to keep track of two pieces of information: the sum of the grades and the amount of grades. Use -1 as a sentinel value to finish inputting grades. 
+**Learning Objectives:**
+- Use sentinel values to control loop termination
+- Implement a `while` loop to process variable amounts of data
+- Accumulate data using multiplication and counting
+- Apply `Math.pow()` to calculate the nth root
+- Format output using `printf()` with decimal precision
+- Avoid common pitfalls like initializing accumulators incorrectly
+- Understand and prevent integer division errors
+- Apply loops to solve real-world computational problems
 
-**Practice Exercise:** Write a simple program that:
-1. Prompts the user to enter grades (or -1 to end)
-2. Uses a while loop to accumulate the sum and count
-3. Calculates and prints the average when the user enters -1
+---
 
-The following is an example of the program flow:
+## 🚀 Getting Started with GitHub Codespaces
 
+### Initial Setup
+1. **Accept the assignment** via the GitHub Classroom link provided
+2. **Open your repository** in GitHub Codespaces:
+   - Click the green "**Code**" button
+   - Select "**Codespaces**" tab
+   - Click "**Create codespace on main**"
+3. **Wait for the environment to load** (this may take 1-2 minutes on first launch)
+4. **Explore your workspace** - On the left side, you'll see the file explorer with:
+   - `README.md` (this file)
+   - `InClass8_FirstName_LastName.java` - for your in-class activity
+   - Other supporting files
+
+**Note:** You will create the `Lab8_FirstName_LastName.java` file yourself. Update all filenames and class headers with your actual first and last name.
+
+---
+
+## 📚 Key Concepts for This Lab
+
+This lab builds on fundamental concepts you've learned in class. You'll need to apply your knowledge of loops, variables, and mathematical operations. **Review your lecture notes, textbook, and class examples** for detailed explanations and syntax.
+
+### Sentinel-Controlled Loops
+A **sentinel value** is a special input that signals the program to stop processing. For this lab, you'll use `-1` as the sentinel since processor speeds are always positive.
+
+**Important Pattern:** When using a sentinel-controlled loop, you need to:
+1. Read input **before** entering the loop (called a "priming read")
+2. Check the condition in the loop header
+3. Process the data inside the loop
+4. Read the next input **at the end** of the loop body
+
+**Why read input twice?** Review your textbook's section on while loops and sentinel values for the complete pattern.
+
+### Accumulator Variables
+Loops often require **accumulator variables** to track running calculations. Consider:
+- What starting value makes sense for a variable that will hold a **sum**?
+- What starting value makes sense for a variable that will hold a **product**?
+- What starting value makes sense for a variable that will **count** items?
+
+**Hint:** Think about the identity element for each operation. What number can you add without changing a value? What number can you multiply without changing a value?
+
+### Geometric Mean Concept
+The **geometric mean** differs from the arithmetic average (what you calculate when finding the mean of test scores):
+- **Arithmetic mean:** Add all numbers, then divide by the count
+- **Geometric mean:** Multiply all numbers, then take the nth root
+
+**Formula:** Geometric Mean = (product)^(1/n)
+
+The geometric mean is commonly used in computer performance analysis because it better represents data that spans different scales.
+
+### Mathematical Operations You'll Need
+**Taking Roots:** Remember from math class that the nth root of a number is the same as raising that number to the power of (1/n). For example:
+- Square root of x = x^(1/2)
+- Cube root of x = x^(1/3)
+- nth root of x = x^(1/n)
+
+Java provides `Math.pow(base, exponent)` to raise a base to any power.
+
+**Integer Division Warning:** When dividing integers in Java, the result is truncated. Research how to force floating-point division when needed.
+
+### Formatting Output
+The `printf()` method allows you to control decimal precision in your output. You'll need to format your result to exactly two decimal places.
+
+**Research:** Look up the format specifier for floating-point numbers and how to specify decimal places. Your textbook has examples of `printf()` formatting.
+
+---
+
+**Before starting the lab, make sure you understand:**
+- How to structure a sentinel-controlled while loop
+- The difference between reading input before vs. inside a loop
+- How to properly initialize accumulator variables
+- How to use `Math.pow()` for exponentiation
+- How to avoid integer division
+- How to format output with `printf()`
+
+**Refer to:** Your lecture notes, textbook chapters on loops and mathematical operations, and in-class examples.
+
+---
+
+## 📝 Part 1: In-Class Activity (Participation Points)
+**File to Work With:** `InClass8_FirstName_LastName.java`
+
+### Task
+Write a program that calculates the **average of course grades** using a sentinel-controlled loop. This simpler averaging exercise will prepare you for calculating the geometric mean in the main lab.
+
+The key difference: averaging uses **addition and division**, while geometric mean uses **multiplication and roots**. Both require the same loop pattern!
+
+**Requirements:**
+1. **Update** the filename and class name with your actual first and last name
+2. **Import** Scanner at the top of your file
+3. **Declare and initialize variables** to store:
+   - The next grade entered by the user (`int`)
+   - The sum of all grades (`int`) - what value should this start at?
+   - The count of grades entered (`int`) - what value should this start at?
+   - The final average (`double`)
+4. **Prompt** the user to enter a grade or -1 to end
+5. **Read** the first grade (this is the "priming read" mentioned earlier)
+6. **Write a while loop** that continues while the grade is not -1:
+   - Add the grade to the sum
+   - Increment the count
+   - Prompt and read the next grade (this is crucial!)
+7. **Calculate** the average after the loop ends
+   - **Important:** How do you avoid integer division?
+8. **Display** the average formatted to two decimal places
+9. **Add detailed comments** explaining:
+   - What the program does overall
+   - Why your initialization values make sense
+   - How the sentinel value controls the loop
+   - Why reading input twice is necessary
+
+### Example Output
 ```
 Please enter a grade (-1 to end): 100
 Please enter a grade (-1 to end): 64
 Please enter a grade (-1 to end): 87
 Please enter a grade (-1 to end): -1
-The average for the course is 83.67.
+The average for the course is 83.67
 ```
 
-This simpler averaging program prepares you for the main lab assignment where you'll calculate the geometric mean of processor speeds.
+### Testing Your In-Class Program
+Test with various scenarios:
+- **Multiple grades:** 90, 85, 92, -1 → Average should be 89.00
+- **Single grade:** 100, -1 → Average should be 100.00
 
 ---
 
-## Task
+## 🔬 Part 2: Main Lab Assignment
 
-Create a project called `Processors_FirstName_LastName` or `Lab8_FirstName_LastName`. Remember to include comments summarizing the program.
+### Background
+A computer hardware manufacturer is conducting benchmark tests to analyze processor performance across different CPUs. Rather than using a simple average, they need to calculate the **geometric mean** of processor speeds—a more accurate statistical measure for performance metrics that span different scales.
+
+Your task is to create a program that:
+- Accepts an unknown number of processor speed measurements
+- Calculates the geometric mean of all measurements
+- Displays the result with professional formatting
+
+### Task
+Create a file named `Lab8_FirstName_LastName.java` (replace with your actual name). Remember to include comprehensive comments summarizing the program's purpose and approach.
 
 ### Requirements
 
-1. **Declare a Scanner** that accepts input from the keyboard.
+1. **Import Scanner and set up your class**
+   - Import the Scanner class at the top
+   - Create your class with the name matching your filename
+   - Include a detailed header comment with your name, date, and program purpose
 
-2. **Declare the following four variables** in your program:
-
-   • A variable of type `int` that will hold the next processor speed to be included in the set
+2. **Declare and initialize variables**
    
-   • A variable of type `int` that will hold the amount of processor speeds (data points)
+   You will need **four variables**:
    
-   • A variable of type `int` that will hold the product of all processor speeds
+   - `int nextSpeed` - holds the next processor speed entered by the user
+   - `int count` - tracks how many processor speeds have been entered (what starting value?)
+   - `int product` - stores the running product of all speeds (what starting value?)
+   - `double geometricMean` - holds the final calculated result
    
-   • A variable of type `double` that will hold the final geometric mean of the data set
+   **Think carefully:** Why are the starting values for `count` and `product` different?
 
-   **Initialize the variables for the amount and product to appropriate values** given the purpose of this program.
+3. **Get the first input (priming read)**
+   - Prompt the user to enter a processor speed or -1 to finish
+   - Read the user's input into `nextSpeed`
 
-3. **Prompt the user** to enter a processor speed or -1 to end. Use the appropriate method of the Scanner class to assign the user's input to the int variable for the next processor speed.
-
-4. **Write a while loop** that will check if the user's input is not -1. While the input is not -1, do the following:
-
-   • Multiply the product by the next processor speed and assign this result back to the product.
+4. **Implement the sentinel-controlled while loop**
    
-   • Increment the amount of processor speeds.
+   The loop should continue while `nextSpeed != -1`:
+   - Update the product by multiplying it with the new speed
+   - Increment the count of data points
+   - Prompt and read the next speed (this updates the loop condition!)
+
+5. **Calculate the geometric mean**
    
-   • Prompt the user again to enter a processor speed or -1 to end. Use the appropriate method of the Scanner class to assign the user's input to the int variable for the next processor speed.
+   After the loop ends, calculate the geometric mean:
+   - Remember: geometric mean = (product)^(1/count)
+   - Use `Math.pow()` with the appropriate base and exponent
+   - **Watch out:** How do you prevent integer division in the exponent?
 
-5. **After the user has finished entering processor speeds**, calculate the geometric mean using `Math.pow` to get the nth root. Be careful about performing integer division.
+6. **Display the result**
+   
+   Use `printf()` to format the output to exactly two decimal places.
+   - Research the correct format specifier for floating-point numbers
+   - Include a descriptive message with the result
 
-6. **Display the geometric mean** to the console formatted to two decimal places.
-
----
-
-## Implementation Notes
-
-- Initialize the product variable to 1 (since multiplying by 0 would result in 0)
-- Initialize the amount variable to 0 (since you start with no data points)
-- The geometric mean formula is: (product)^(1/n) where n is the amount of numbers
-- Use the appropriate mathematical expression to calculate the nth root, also known as "to the power of 1/n"
-- Use `printf` to display the result with two decimal places
-- Make sure to convert at least one value to double to avoid integer division
-
----
-
-## Running Your Program
-
-### Method 1: Using the Terminal
-1. Open the terminal in your codespace (Terminal → New Terminal)
-2. Compile your program:
-   ```bash
-   javac Lab8_YourFirstName_YourLastName.java
-   ```
-3. Run your program:
-   ```bash
-   java Lab8_YourFirstName_YourLastName
-   ```
-
-Replace `Lab8_YourFirstName_YourLastName.java` with your actual file name. If you are running the in-class exercise, use the corresponding file name instead.
-
----
-
-## Example Program Flow
-
+### Example Output
 ```
-Enter a processor speed (-1 to end): 100
-Enter a processor speed (-1 to end): 40
-Enter a processor speed (-1 to end): 76
-Enter a processor speed (-1 to end): -1
-The geometric mean of the processor speeds is 67.24
+Enter a processor speed (-1 to finish): 2400
+Enter a processor speed (-1 to finish): 3200
+Enter a processor speed (-1 to finish): 2800
+Enter a processor speed (-1 to finish): -1
+The geometric mean of processor speeds is 2782.83
 ```
 
----
-
-## Grading Criteria
-
-- **Comment summarizing the program** (5 points)
-- **Importing and declaring the Scanner class** (2 points)
-- **Appropriate variable declarations** (15 points total)
-- **The first request for the user's input** (3 points)
-- **Properly implementing the while loop** (45 points)
-- **The final calculation of the geometric mean** (20 points)
-- **The output of the program with the geometric mean formatted to two decimal places** (10 points)
-
-**Total: 100 points**
+### Verification
+You can verify your program is working correctly by calculating by hand:
+- Product: 2400 × 3200 × 2800 = 21,504,000,000
+- Count: 3
+- Geometric Mean: 21,504,000,000^(1/3) ≈ 2782.83
 
 ---
 
-💡 **Fun Tip:** Test your program with different sets of processor speeds to verify your geometric mean calculation is correct. You can use an online calculator to check your results! Don't forget to take a screenshot of terminal output and add to your directory on the left <-
+## ⚠️ Common Mistakes to Avoid
+
+1. **Incorrect accumulator initialization**
+   - Starting a product at 0 will make every calculation result in 0
+   - Think about what value doesn't change the result when you multiply by it
+
+2. **Integer division in calculations**
+   - When both operands are integers, Java performs integer division
+   - Research how to make Java use floating-point division instead
+   - This is especially critical when calculating 1/count for the exponent
+
+3. **Forgetting the loop update**
+   - If you don't read new input inside the loop, it will run forever
+   - Use Ctrl+C in the terminal if your program won't stop
+
+4. **Wrong format specifier in printf()**
+   - Different data types require different format specifiers
+   - Review your notes on printf() format codes for floating-point numbers
+
+5. **Processing the sentinel value**
+   - Make sure your loop stops BEFORE processing -1
+   - The sentinel should not be included in your calculations
 
 ---
 
+## 🧪 Testing Your Program
 
-## Commit Your Changes
-### Step 1. Use VS Code's Source Control panel:
-   - Click the Source Control icon in the left sidebar
-   - Type a commit message describing your changes
-   - Click "Commit" then "Sync Changes" to push your code
+Test your lab program thoroughly with these cases:
 
-### Step 2: Verify Submission
-After pushing your changes, visit your assignment repository on GitHub Classroom. Confirm that your latest code and commit message appear, and that your files are named correctly. 
+### Test Case 1: Normal Operation
+```
+Input: 1000, 2000, 4000, -1
+Expected: Geometric mean ≈ 2000.00
+```
 
-### Step 3: Submit to Blackboard Assignment
-Once you have verified your submission on GitHub Classroom, copy the URL of your assignment repository and submit this GitHub repository link to Blackboard as confirmation that you are DONE.
+### Test Case 2: Two Values
+```
+Input: 3000, 3000, -1
+Expected: Geometric mean = 3000.00
+```
 
-**Excellent work!** You've reached Lab 8, and this assignment introduces you to loop control with sentinel values and formatted output. Working with while loops and the `printf` method will help you understand how to process variable amounts of data and display results professionally. The geometric mean is used in many real-world applications like calculating average growth rates, investment returns, and benchmark performance. Remember to test your program with different numbers of processor speeds to ensure your loop and calculations work correctly!
+### Test Case 3: Different Magnitudes
+```
+Input: 100, 1000, 10000, -1
+Expected: Geometric mean = 1000.00
+```
 
-**Important:** Focus on completing the lab assignment. Do NOT edit or tamper with any test files, markdown files, or class files if they appear in your repository.
+### Test Case 4: Single Value
+```
+Input: 5000, -1
+Expected: Geometric mean = 5000.00
+```
+
+---
+
+## � Submitting Your Lab
+
+### Using VS Code in Codespaces
+
+**Stage your changes:**
+1. Click the **Source Control** icon in the left sidebar (looks like a branching diagram)
+2. You'll see your changed files under "Changes"
+3. Click the **+** button next to each file to stage it (or click the + next to "Changes" to stage all)
+
+**Commit your changes:**
+1. Type a descriptive message in the text box at the top (e.g., "Completed Lab 8")
+2. Click the **✓ Commit** button (or press Ctrl+Enter)
+
+**Push to GitHub (SYNC):**
+1. Click the **•••** (three dots) menu in the Source Control panel
+2. Select **Push** (or click the **Sync Changes** button)
+3. Your changes are now on GitHub!
+
+**Submit to Blackboard:**
+1. Go to your GitHub repository in a web browser
+2. Copy the URL from the address bar
+3. Submit this URL to the Lab 8 assignment on Blackboard
+
+### Verification
+To verify your submission worked:
+- Visit your GitHub repository
+- You should see your Java files updated with recent commit timestamps
+- Click on your files to ensure the latest code is visible
+
+---
+
+## 🎯 Grading Criteria
+
+**In-Class Activity (Participation):**
+- File correctly named with your name
+- Program compiles without errors
+- Correctly implements sentinel-controlled loop
+- Calculates average accurately
+- Includes meaningful comments
+
+**Main Lab Assignment:**
+- File correctly named with your name
+- Program compiles and runs without errors
+- Variables correctly declared and initialized
+- Sentinel-controlled loop implemented properly
+- Geometric mean calculated correctly using `Math.pow()`
+- Output formatted to two decimal places
+- Code includes comprehensive comments
+- Follows good coding style and conventions
+
+---
+
+## 📖 Additional Resources
+
+**Java Documentation:**
+- [Math.pow() documentation](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Math.html#pow(double,double))
+- [Scanner class documentation](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Scanner.html)
+- [printf() formatting guide](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/PrintStream.html#printf(java.lang.String,java.lang.Object...))
+
+**Concepts:**
+- [Geometric Mean Explained](https://en.wikipedia.org/wiki/Geometric_mean)
+- [Sentinel Values in Programming](https://en.wikipedia.org/wiki/Sentinel_value)
+
+---
+
+## ❓ Getting Help
+
+If you encounter issues:
+1. **Read error messages carefully** - they often tell you exactly what's wrong
+2. **Check your initialization values** - especially for product (should be 1)
+3. **Verify your loop structure** - input before loop, input at end of loop
+4. **Test with simple numbers** - try 2, 8, -1 (geometric mean should be 4.0)
+5. **Ask during lab time** - your instructor and TAs are here to help!
+
+Remember: Everyone struggles with loops at first. With practice, they become second nature!
+
+---
+
+**Happy Coding! 🚀**
